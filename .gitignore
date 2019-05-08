@@ -26,4 +26,6 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 node_modules
+tsconfig.tsbuildinfo
+dist
 __diff_output__

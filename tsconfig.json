@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "diagnostics": true,
     "module": "commonjs",
     "target": "ES2016",
@@ -14,8 +15,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "dist",
+    "rootDir": "src",
     "baseUrl": ".",
-    "allowJs": true,
     "sourceMap": true,
     "typeRoots": [
       "node_modules/@types"

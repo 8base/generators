@@ -1,11 +1,16 @@
 {
   "name": "@8base/generators",
-  "version": "0.20.0",
+  "version": "0.30.0",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.js",
   "scripts": {
-    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build:clean": "rm -rf dist",
+    "build": "yarn build:clean && yarn build:types && yarn build:js",
+    "build:types": "yarn tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
     "watch": "npm run build -- --watch",
     "tslint": "tslint -c tslint.json -p tsconfig.json 'src/**/*.ts'",
     "test": "NPM_ENV=test jest"
@@ -15,6 +20,7 @@
     "@8base/utils": "^0.20.0",
     "@babel/runtime": "^7.3.1",
     "change-case": "^3.1.0",
+    "copyfiles": "^2.1.0",
     "ejs": "^2.6.1",
     "os": "^0.1.1",
     "pluralize": "^7.0.0",
@@ -24,6 +30,10 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/change-case": "^2.3.1",
     "@types/ejs": "^2.6.3",
     "@types/node": "^12.0.0",
