@@ -6,8 +6,8 @@ import { DateTime } from 'luxon';
 import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
 import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
 
-const <%= changeCase.upper(screenName)%>_LIST_QUERY = gql`<%= 
-queryText%>
+const <%= changeCase.upper(screenName)%>_LIST_QUERY = gql`
+<%= queryText%>
 `;
 
 const TABLE_COLUMNS = [<% 
@@ -48,7 +48,7 @@ const <%= changeCase.pascal(screenName)%>Table = enhancer(
             <Menu>
               <Menu.Item
                 onClick={() => {
-                  this.props.openModal('<%= changeCase.upper(screenName)%>_EDIT_DIALOG_ID', { initialValues: rowData });
+                  this.props.openModal('<%= changeCase.upper(screenName)%>_EDIT_DIALOG_ID', { id: rowData.id });
                   closeDropdown();
                 }}
               >

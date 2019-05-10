@@ -1,5 +1,6 @@
 import { SchemaNameGenerator } from '@8base/schema-name-generator';
-import { createTableRowUpdateTag, tableSelectors } from '@8base/utils';
+// @ts-ignore
+import { createTableRowUpdateTag, createTableRowQueryTag , tableSelectors } from '@8base/utils';
 import * as changeCase from 'change-case';
 import * as ejs from 'ejs';
 import * as pluralize from 'pluralize';
@@ -18,12 +19,14 @@ export const generateEditForm = ({ tablesList, tableName, screenName }: Generato
 
   const entityName = pluralize.singular(tableName);
   const mutationText = createTableRowUpdateTag(tablesList, tableName);
+  const queryEntityText = createTableRowQueryTag(tablesList, tableName, { withMeta: false });
   const fields = table.fields.filter(({ isMeta, name }) => !isMeta && isFieldNeedsToInclude(name, includeColumns));
 
   const tableGenerated = ejs.render(editForm, {
     changeCase,
     chunks,
     entityName,
+    queryEntityText,
     fields,
     mutationText,
     pluralize,

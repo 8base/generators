@@ -46,6 +46,7 @@ export const generateScreen = ({ tablesList, screen, rootFile }: GenerateProject
   fs[`src/routes/${getScreenFolderName(screenName)}/index.js`] =
     generateIndex(generatorData);
 
+
   if (typeof rootFile === 'string') {
     fs['src/Root.js'] = formatCode(
       rootFile
@@ -54,6 +55,8 @@ export const generateScreen = ({ tablesList, screen, rootFile }: GenerateProject
         .replace(`${PAGE_CONSTANTS.APP_ROUTES}`, `${PAGE_CONSTANTS.APP_ROUTES}${os.EOL}${chunks.routeComponent({ screenName, routeUrl, changeCase })}`),
     );
   }
+
+
 
   return fs;
 };

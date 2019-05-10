@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
 import { Form as FormLogic, Field, FieldArray } from '@8base/forms';
 import {
+  AsyncContent,
   Dialog,
   Grid,
   Button,
@@ -21,6 +22,10 @@ import {
 } from '@8base/boost';
 import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components'
 
+const <%= changeCase.upper(entityName)%>_QUERY = gql`
+  <%= queryEntityText%> 
+`;
+
 const <%= changeCase.upper(screenName)%>_UPDATE_MUTATION = gql`
   mutation <%= changeCase.pascal(screenName)%>Update($data: <%= SchemaNameGenerator.getUpdateInputName(tableName)%>!) {
     <%= SchemaNameGenerator.getUpdateItemFieldName(tableName)%>(data: $data) {
@@ -37,6 +42,7 @@ const <%= changeCase.upper(screenName)%>_UPDATE_MUTATION = gql`
     tableSelectors: tableSelectors,
     table: table,
 }); %>
+
 const ehnhancer = graphql(<%= changeCase.upper(screenName)%>_UPDATE_MUTATION, {
   name: '<%= SchemaNameGenerator.getUpdateItemFieldName(tableName)%>',
   options: {
@@ -61,41 +67,47 @@ const <%= changeCase.pascal(screenName)%>EditDialog = ehnhancer(
       this.context.closeModal('<%= changeCase.upper(screenName)%>_EDIT_DIALOG_ID');
     };
 
-    renderFormContent = ({ handleSubmit, invalid, submitting, pristine }) => (
-      <form onSubmit={handleSubmit}>
-        <Dialog.Header title="Edit <%= changeCase.pascal(screenName)%>" onClose={this.onClose} />
-        <Dialog.Body scrollable>
-          <Grid.Layout gap="md" stretch><%-
-            chunks.fieldsInputsList({ 
-              fields: fields,
-              chunks: chunks,
-              changeCase: changeCase,
-              pluralize: pluralize,
-              SchemaNameGenerator: SchemaNameGenerator,
-            }); %>
-          </Grid.Layout>
-        </Dialog.Body>
-        <Dialog.Footer>
-          <Button color="neutral" type="button" variant="outlined" disabled={submitting} onClick={this.onClose}>
-            Cancel
-          </Button>
-          <Button color="primary" type="submit" disabled={pristine || invalid} loading={submitting}>
-            Update <%= changeCase.pascal(screenName)%>
-          </Button>
-        </Dialog.Footer>
-      </form>
-    );
-
     renderForm = ({ args }) => {
       return (
-        <FormLogic
-          type="UPDATE"
-          tableSchemaName="<%= tableName%>"
-          onSubmit={this.updateOnSubmit(args.initialValues.id)}
-          initialValues={args.initialValues}
-        >
-          {this.renderFormContent}
-        </FormLogic>
+        <Query query={BROKER_QUERY} variables={{ id: args.id }}>
+          {({ data, loading }) => (
+          <FormLogic
+            type="UPDATE"
+            tableSchemaName="<%= tableName%>"
+            onSubmit={this.updateOnSubmit(args.id)}
+            initialValues={data.<%= changeCase.lower(entityName) %>}
+          >
+            {({ handleSubmit, invalid, submitting, pristine }) => (
+              <form onSubmit={handleSubmit}>
+                <Dialog.Header title="Edit <%= changeCase.pascal(screenName)%>" onClose={this.onClose} />
+                <Dialog.Body scrollable>
+                  <AsyncContent loading={ loading } stretch>
+                    <Grid.Layout gap="md" stretch>
+                      <%-
+                            chunks.fieldsInputsList({ 
+                              fields: fields,
+                              chunks: chunks,
+                              changeCase: changeCase,
+                              pluralize: pluralize,
+                              SchemaNameGenerator: SchemaNameGenerator,
+                            }); %>
+                    </Grid.Layout>
+                  </AsyncContent>
+                </Dialog.Body>
+                <Dialog.Footer>
+                  <Button color="neutral" type="button" variant="outlined" disabled={submitting} onClick={this.onClose}>
+                    Cancel
+                  </Button>
+                  <Button color="primary" type="submit" disabled={pristine || invalid} loading={submitting}>
+                    Update
+                    <%= changeCase.pascal(screenName)%>
+                  </Button>
+                </Dialog.Footer>
+              </form>
+              )}
+          </FormLogic>
+        )}
+        </Query>
       );
     };
 

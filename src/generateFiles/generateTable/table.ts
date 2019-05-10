@@ -1,4 +1,5 @@
 import { SchemaNameGenerator } from '@8base/schema-name-generator';
+// @ts-ignore
 import { createQueryColumnsList, createTableFilterGraphqlTag, tableSelectors } from '@8base/utils';
 import * as changeCase from 'change-case';
 import * as ejs from 'ejs';
