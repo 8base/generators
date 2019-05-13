@@ -1,5 +1,4 @@
 import React from 'react';
-import { memoizeWith, identity } from 'ramda';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
 import { Form as FormLogic, Field, FieldArray } from '@8base/forms';
@@ -57,11 +56,11 @@ const <%= changeCase.pascal(screenName)%>EditDialog = ehnhancer(
   class <%= changeCase.pascal(screenName)%>EditDialog extends React.PureComponent {
     static contextType = ModalContext;
 
-    updateOnSubmit = memoizeWith(identity, id => async data => {
+    updateOnSubmit = id => async data => {
       await this.props.<%= SchemaNameGenerator.getUpdateItemFieldName(tableName)%>({ variables: { data: { ...data, id } } });
 
       this.context.closeModal('<%= changeCase.upper(screenName)%>_EDIT_DIALOG_ID');
-    });
+    };
 
     onClose = () => {
       this.context.closeModal('<%= changeCase.upper(screenName)%>_EDIT_DIALOG_ID');
@@ -69,7 +68,7 @@ const <%= changeCase.pascal(screenName)%>EditDialog = ehnhancer(
 
     renderForm = ({ args }) => {
       return (
-        <Query query={BROKER_QUERY} variables={{ id: args.id }}>
+        <Query query={<%= changeCase.upper(entityName)%>_QUERY} variables={{ id: args.id }}>
           {({ data, loading }) => (
           <FormLogic
             type="UPDATE"

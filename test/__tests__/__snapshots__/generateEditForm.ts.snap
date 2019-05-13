@@ -2,7 +2,6 @@
 
 exports[`should generate update form by the table name 1`] = `
 "import React from 'react';
-import { memoizeWith, identity } from 'ramda';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
 import { Form as FormLogic, Field, FieldArray } from '@8base/forms';
@@ -100,11 +99,11 @@ const PropertyEditDialog = ehnhancer(
   class PropertyEditDialog extends React.PureComponent {
     static contextType = ModalContext;
 
-    updateOnSubmit = memoizeWith(identity, id => async data => {
+    updateOnSubmit = id => async data => {
       await this.props.propertyUpdate({ variables: { data: { ...data, id } } });
 
       this.context.closeModal('PROPERTY_EDIT_DIALOG_ID');
-    });
+    };
 
     onClose = () => {
       this.context.closeModal('PROPERTY_EDIT_DIALOG_ID');
@@ -112,7 +111,7 @@ const PropertyEditDialog = ehnhancer(
 
     renderForm = ({ args }) => {
       return (
-        <Query query={BROKER_QUERY} variables={{ id: args.id }}>
+        <Query query={PROPERTY_QUERY} variables={{ id: args.id }}>
           {({ data, loading }) => (
             <FormLogic
               type=\\"UPDATE\\"

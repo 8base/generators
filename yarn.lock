@@ -9,10 +9,10 @@
   dependencies:
     pluralize "^7.0.0"
 
-"@8base/utils@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@8base/utils/-/utils-0.20.0.tgz#f4b232b7c14aae2c4ddb697f0c85065581d64f05"
-  integrity sha512-WruViDA3DUfGN+Gz2KI4vIpk+WOkvYC78Mn9PKj5aPB72t8oEeLViWmli68rQCSyu2uOuXkamR0mOFQQuWgrNw==
+"@8base/utils@^0.20.1":
+  version "0.20.1"
+  resolved "https://registry.yarnpkg.com/@8base/utils/-/utils-0.20.1.tgz#8644748c7e4218ed534418c033442bb8fab29b09"
+  integrity sha512-xU9K9Knz+863uew6/ZaTq1gR0h7Wt1Awe58gGROICanW4ye5nzmG6HyKbVbHFp+x+4HjSjEeM4vkTH8+hYWuqg==
   dependencies:
     "@8base/schema-name-generator" "^0.1.1"
     "@babel/runtime" "^7.3.1"

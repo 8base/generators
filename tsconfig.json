@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "composite": true,
-    "declarationDir": "dist",
     "diagnostics": true,
     "module": "commonjs",
     "target": "ES2016",
