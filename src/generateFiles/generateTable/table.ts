@@ -5,14 +5,14 @@ import * as changeCase from 'change-case';
 import * as ejs from 'ejs';
 import * as pluralize from 'pluralize';
 import { formatCode } from '../../formatCode';
-import { GeneratorsConfig, GeneratorsData } from '../../types';
+import { GeneratorsConfig, IGeneratorsData } from '../../types';
 import { chunks } from '../chunks';
 
 // @ts-ignore
 import tableTemplate from './table.js.ejs';
 
 export const generateTable =
-  ({ tablesList, tableName, screenName }: GeneratorsData, config: GeneratorsConfig) => {
+  ({ tablesList, tableName, screenName }: IGeneratorsData, config: GeneratorsConfig) => {
     const table = tablesList.find(({ name }) => tableName === name);
 
     if (!table) { throw new Error(`Can't find a table ${tableName}`); }
@@ -22,17 +22,17 @@ export const generateTable =
     const columns = createQueryColumnsList(tablesList, tableName, config);
 
     const tableGenerated = ejs.render(tableTemplate, {
-      chunks,
-      tableSelectors,
-      table,
-      queryText,
-      columns,
-      changeCase,
-      pluralize,
       SchemaNameGenerator,
-      tableName,
+      changeCase,
+      chunks,
+      columns,
       entityName,
+      pluralize,
+      queryText,
       screenName: screenName || entityName,
+      table,
+      tableName,
+      tableSelectors,
     });
 
     return formatCode(tableGenerated);

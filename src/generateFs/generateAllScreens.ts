@@ -6,15 +6,21 @@ import { generateEditForm } from '../generateFiles/generateEditForm/editForm';
 import { generateIndex } from '../generateFiles/generateIndex';
 import { generateRoot } from '../generateFiles/generateRoot/generateRoot';
 import { generateTable } from '../generateFiles/generateTable/table';
-import { GeneratorsConfig, ScreenTable } from '../types';
-import { getCreateFormFileName, getDeleteFormFileName, getEditFormFileName, getScreenFolderName, getTableFileName } from './generateFileNames';
+import { GeneratorsConfig, IScreenTable } from '../types';
+import {
+  getCreateFormFileName,
+  getDeleteFormFileName,
+  getEditFormFileName,
+  getScreenFolderName,
+  getTableFileName,
+} from './generateFileNames';
 
-interface GenerateProjectFsData {
+interface IGenerateProjectFsData {
   tablesList: TableSchema[];
-  screens: ScreenTable[];
+  screens: IScreenTable[];
 }
 
-export const generateAllScreens = ({ tablesList, screens }: GenerateProjectFsData, config: GeneratorsConfig) => {
+export const generateAllScreens = ({ tablesList, screens }: IGenerateProjectFsData, config: GeneratorsConfig) => {
   const fs: { [key: string]: string } = {};
 
   screens.forEach(({ screenName, tableName, tableFields, formFields }) => {

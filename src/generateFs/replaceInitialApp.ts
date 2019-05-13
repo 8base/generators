@@ -2,16 +2,16 @@
 const FS_NAMES = {
   APPLICATION_JS: 'src/Application.js',
   APPOLO_CONFIG_JS: 'apollo.config.js',
+  EIGHT_BASE_YML: '.8base.yml',
   PACKAGE_JSON: 'package.json',
   PACKAGE_LOCK_JSON: 'package-lock.json',
-  EIGHT_BASE_YML: '.8base.yml',
 };
 
-interface AppFs {
+interface IAppFs {
   [path: string]: string;
 }
 
-interface AppFsConstants {
+interface IAppFsConstants {
   endpoint?: string;
   authClientId?: string;
   authDomain?: string;
@@ -28,8 +28,12 @@ const removePieceOfCode = (code: string, pieceName: string) => {
   return code.replace(regexp, '');
 };
 
-export const replaceInitialApp = (fsObject: AppFs, constants: AppFsConstants, config: { authMode: 'web' | 'api-token' } = { authMode: 'web' }): AppFs => {
-  const fsObjectReplaced: AppFs = {};
+export const replaceInitialApp = (
+  fsObject: IAppFs,
+  constants: IAppFsConstants,
+  config: { authMode: 'web' | 'api-token',
+} = { authMode: 'web' }): IAppFs => {
+  const fsObjectReplaced: IAppFs = {};
   const isApiTokenMode = config.authMode === 'api-token';
 
   Object.keys(fsObject).forEach((filePath) => {
@@ -57,7 +61,8 @@ export const replaceInitialApp = (fsObject: AppFs, constants: AppFsConstants, co
       }
 
       case FS_NAMES.PACKAGE_LOCK_JSON: {
-        fsObjectReplaced[FS_NAMES.PACKAGE_LOCK_JSON] = fsObject[FS_NAMES.PACKAGE_LOCK_JSON] && fsObject[FS_NAMES.PACKAGE_LOCK_JSON]
+        fsObjectReplaced[FS_NAMES.PACKAGE_LOCK_JSON] =
+          fsObject[FS_NAMES.PACKAGE_LOCK_JSON] && fsObject[FS_NAMES.PACKAGE_LOCK_JSON]
           .replace(/"name": ".*"/, `"name": "${constants.appName}"`)
           .replace(/"version": ".*"/, '"version": "1.0.0"');
 

@@ -11,10 +11,10 @@ export const generateIndex = ({ tableName, screenName }: { tableName: string, sc
 
   const tableGenerated = ejs.render(index, {
     changeCase,
-    pluralize,
-    tableName,
     entityName,
+    pluralize,
     screenName: screenName || entityName,
+    tableName,
   });
 
   return formatCode(tableGenerated);
