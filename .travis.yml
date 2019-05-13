@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+- 9
+
+ install:
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
+- yarn
+- yarn build
+
+ script:
+- yarn tslint
+- yarn test
+
+ deploy:
+  provider: npm
+  email: zouxuoz@gmail.com
+  skip_cleanup: true
+  api_key:
+    secure: qqHeGTrCOfcRRpuIUKwg6dri/ABSZA2jNLsy7AQH2TMhyARe3oQpmnvIuOlUl88QO34WnYs3KaMMAcbtcFUtFOesPIwnO58y4JTV1CJm+Kjg9xc5WEYOjZ1CCmhZtreF5yGVmJC2h7ssjDWJCX3Ezs2MD4lzeB7Q9xjjZkUC4QP0NqE/CrNeFRspqsffGZx7FiHy0/tFyDZ9U11aWXPov5PcSK9GO6eeNaIrc6yFh3l4AH77h2Bsy3GJugg4yyIZ8cNkg+mIAUWDEsnizOAFQ++yjqJl77j3ogYG2bnCoUfxGDsMVs7v0nj5p2kqZulXNJmL5Bs6kFD+CWdJu6K+eF+C1sD3th0YpI/Hg0dryw7GQFJAgKPVjhVQpf0JPXqaN1Iu4IamUjbBOe+RyAqPHkEUL+j2t4L+DroAJOVCBksxsywoiYPYg5oZujHuMPBfroqyxFJ7Ul04WbP+jwey6PgUYKaurFBYb2TqOSdTZqZ93u4E0/jpMFyu7VrfbBtBGGSRzigW+fkm0wvcxG3WdP54KQt5l+uHqIKmG3nKr3XwVntsBn0/gbmBKvE+qH4pM6Cx0SvfFK7mJUJ0xKHDYGlfM+gqMTLCvH1n/E47VO7IHsuEGnRWSpoFhQWTvgYUjvVzTtwj+26XPEyOFBdAxfUbUmstLZO2puJrpvfT3U0=
+  on:
+    tags: true
+    repo: 8base/boost
+    branch: master
