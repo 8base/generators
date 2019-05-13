@@ -1,6 +1,6 @@
 {
   "name": "@8base/generators",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.js",
@@ -13,7 +13,7 @@
     "build:js": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
     "watch": "npm run build -- --watch",
     "tslint": "tslint -c tslint.json -p tsconfig.json 'src/**/*.ts'",
-    "test": "NPM_ENV=test jest"
+    "test": "cross-env NPM_ENV=test jest"
   },
   "dependencies": {
     "@8base/schema-name-generator": "^0.1.1",
@@ -43,6 +43,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-inline-import": "^3.0.0",
+    "cross-env": "^5.2.0",
     "documentation": "^8.0.0",
     "flow-copy-source": "^2.0.2",
     "jest": "^23.1.0",
@@ -54,6 +55,19 @@
     "collectCoverageFrom": [
       "<rootDir>/src/**",
       "!<rootDir>/**/__tests__/**"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)"
     ]
   },
   "license": "MIT"

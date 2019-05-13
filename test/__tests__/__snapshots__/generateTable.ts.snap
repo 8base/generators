@@ -9,7 +9,8 @@ import { DateTime } from 'luxon';
 import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
 import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
 
-const PROPERTY_LIST_QUERY = gql\`query PropertiesTableContent($filter: PropertyFilter, $orderBy: [PropertyOrderBy], $after: String, $before: String, $first: Int, $last: Int, $skip: Int) {
+const PROPERTY_LIST_QUERY = gql\`
+query PropertiesTableContent($filter: PropertyFilter, $orderBy: [PropertyOrderBy], $after: String, $before: String, $first: Int, $last: Int, $skip: Int) {
   propertiesList(filter: $filter, orderBy: $orderBy, after: $after, before: $before, first: $first, last: $last, skip: $skip) {
     items {
       id
@@ -228,7 +229,7 @@ const PropertyTable = enhancer(
             <Menu>
               <Menu.Item
                 onClick={() => {
-                  this.props.openModal('PROPERTY_EDIT_DIALOG_ID', { initialValues: rowData });
+                  this.props.openModal('PROPERTY_EDIT_DIALOG_ID', { id: rowData.id });
                   closeDropdown();
                 }}
               >
