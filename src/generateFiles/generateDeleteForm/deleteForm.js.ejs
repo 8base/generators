@@ -1,6 +1,5 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { memoizeWith, identity } from 'ramda';
 import { Form as FormLogic } from '@8base/forms';
 import { Dialog, Button, ModalContext } from '@8base/boost';
 import { graphql } from 'react-apollo';
@@ -27,11 +26,11 @@ const <%= changeCase.pascal(screenName)%>DeleteDialog = enhancer(
   class <%= changeCase.pascal(screenName)%>DeleteDialog extends React.Component {
     static contextType = ModalContext;
 
-    createOnSubmit = memoizeWith(identity, id => async () => {
+    createOnSubmit = id => async () => {
       await this.props.<%= SchemaNameGenerator.getDeleteItemFieldName(tableName)%>({ variables: { id } });
 
       this.context.closeModal('<%= changeCase.upper(screenName)%>_DELETE_DIALOG_ID');
-    });
+    };
 
     onClose = () => {
       this.context.closeModal('<%= changeCase.upper(screenName)%>_DELETE_DIALOG_ID');

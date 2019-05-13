@@ -3,7 +3,6 @@
 exports[`should generate delete form by the table name 1`] = `
 "import React from 'react';
 import gql from 'graphql-tag';
-import { memoizeWith, identity } from 'ramda';
 import { Form as FormLogic } from '@8base/forms';
 import { Dialog, Button, ModalContext } from '@8base/boost';
 import { graphql } from 'react-apollo';
@@ -30,11 +29,11 @@ const PropertyDeleteDialog = enhancer(
   class PropertyDeleteDialog extends React.Component {
     static contextType = ModalContext;
 
-    createOnSubmit = memoizeWith(identity, id => async () => {
+    createOnSubmit = id => async () => {
       await this.props.propertyDelete({ variables: { id } });
 
       this.context.closeModal('PROPERTY_DELETE_DIALOG_ID');
-    });
+    };
 
     onClose = () => {
       this.context.closeModal('PROPERTY_DELETE_DIALOG_ID');

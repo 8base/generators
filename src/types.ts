@@ -1,21 +1,21 @@
 import { TableSchema } from '@8base/utils';
 
-export interface GeneratorsCommonConfig {
+export interface IGeneratorsCommonConfig {
   deep?: number;
   withMeta?: boolean;
 }
 
 export type GeneratorsConfig = {
   includeColumns?: string[],
-} & GeneratorsCommonConfig;
+} & IGeneratorsCommonConfig;
 
-export interface GeneratorsData {
+export interface IGeneratorsData {
   tablesList: TableSchema[];
   tableName: string;
   screenName?: string;
 }
 
-export interface ScreenTable {
+export interface IScreenTable {
   id?: string;
   tableName: string;
   screenName: string;

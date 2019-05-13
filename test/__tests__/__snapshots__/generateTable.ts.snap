@@ -3,8 +3,8 @@
 exports[`should generate table by the table name 1`] = `
 "import React from 'react';
 import gql from 'graphql-tag';
+import objectPath from 'object-path';
 import { graphql, compose } from 'react-apollo';
-import { pathOr, join } from 'ramda';
 import { DateTime } from 'luxon';
 import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
 import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
@@ -251,7 +251,7 @@ const PropertyTable = enhancer(
 
     renderItems = (column, rowData, handler) => {
       const dataPath = column.name.split('.');
-      const cellData = pathOr('', dataPath, rowData);
+      const cellData = objectPath.get(rowData, dataPath) || '';
 
       if (column.meta.isList) {
         const itemsArray = cellData.items ? cellData.items : cellData;
@@ -289,15 +289,15 @@ const PropertyTable = enhancer(
       const dataPath = column.name.split('.');
 
       if (column.meta.isList) {
-        return pathOr('', [...dataPath, 'count'], rowData);
+        return objectPath.get(rowData, [...dataPath, 'count']) || '';
       } else {
-        return pathOr('', [...dataPath, '_description'], rowData);
+        return objectPath.get(rowData, [...dataPath, '_description']) || '';
       }
     };
 
     renderFile = (column, rowData) => {
       if (column.meta.fieldTypeAttributes.format === FILE_FORMATS.IMAGE && !column.meta.isList) {
-        const cellData = pathOr('', column.name.split('.'), rowData);
+        const cellData = objectPath.get(rowData, column.name.split('.'));
 
         return cellData && <img src={cellData.downloadUrl} alt=\\"filename\\" style={{ width: '5rem' }} />;
       } else {
@@ -363,7 +363,7 @@ const PropertyTable = enhancer(
 
     render() {
       const { properties } = this.props;
-      const tableData = pathOr([], ['propertiesList', 'items'], properties);
+      const tableData = objectPath.get(properties, ['propertiesList', 'items']) || [];
 
       return (
         <TableBuilder
