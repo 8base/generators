@@ -75,6 +75,7 @@ const <%= changeCase.pascal(screenName)%>EditDialog = ehnhancer(
             tableSchemaName="<%= tableName%>"
             onSubmit={this.updateOnSubmit(args.id)}
             initialValues={data.<%= changeCase.lower(entityName) %>}
+            formatRelationToIds
           >
             {({ handleSubmit, invalid, submitting, pristine }) => (
               <form onSubmit={handleSubmit}>

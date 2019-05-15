@@ -138,7 +138,7 @@ const PropertyCreateDialog = enhancer(
     render() {
       return (
         <Dialog id={'PROPERTY_CREATE_DIALOG_ID'} size=\\"sm\\">
-          <FormLogic type=\\"CREATE\\" tableSchemaName=\\"Properties\\" onSubmit={this.onSubmit}>
+          <FormLogic type=\\"CREATE\\" tableSchemaName=\\"Properties\\" onSubmit={this.onSubmit} formatRelationToIds>
             {this.renderFormContent}
           </FormLogic>
         </Dialog>

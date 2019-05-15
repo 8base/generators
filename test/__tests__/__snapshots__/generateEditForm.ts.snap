@@ -118,6 +118,7 @@ const PropertyEditDialog = ehnhancer(
               tableSchemaName=\\"Properties\\"
               onSubmit={this.updateOnSubmit(args.id)}
               initialValues={data.property}
+              formatRelationToIds
             >
               {({ handleSubmit, invalid, submitting, pristine }) => (
                 <form onSubmit={handleSubmit}>

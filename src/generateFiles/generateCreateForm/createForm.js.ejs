@@ -88,7 +88,7 @@ const <%= changeCase.pascal(screenName)%>CreateDialog = enhancer(
     render() {
       return (
         <Dialog id={'<%= changeCase.upper(screenName)%>_CREATE_DIALOG_ID'} size="sm">
-          <FormLogic type="CREATE" tableSchemaName="<%= tableName%>" onSubmit={this.onSubmit}>
+          <FormLogic type="CREATE" tableSchemaName="<%= tableName%>" onSubmit={this.onSubmit} formatRelationToIds>
             {this.renderFormContent}
           </FormLogic>
         </Dialog>

@@ -55,7 +55,11 @@ const PropertyDeleteDialog = enhancer(
     );
 
     renderContent = ({ args }) => {
-      return <FormLogic onSubmit={this.createOnSubmit(args.id)}>{this.renderFormContent}</FormLogic>;
+      return (
+        <FormLogic onSubmit={this.createOnSubmit(args.id)} formatRelationToIds>
+          {this.renderFormContent}
+        </FormLogic>
+      );
     };
 
     render() {
