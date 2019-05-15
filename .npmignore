@@ -1,7 +1,8 @@
 src/
-tests/
+test/
 .travis.yml
 babel.config.js
 tsconfig.json
 tslint.json
 yarn.lock
+tsconfig.tsbuildinfo
