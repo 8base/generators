@@ -18,7 +18,7 @@ export interface IGeneratorsData {
 export interface IScreenTable {
   id?: string;
   tableName: string;
-  screenName: string;
+  screenName?: string;
   routeUrl?: string;
   tableFields?: string[];
   formFields?: string[];
