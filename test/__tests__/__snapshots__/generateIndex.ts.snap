@@ -4,9 +4,9 @@ exports[`should generate table by the table name 1`] = `
 "import React from 'react';
 import { Card, Heading } from '@8base/boost';
 
-import { PropertiesCreateDialog } from './PropertiesCreateDialog';
-import { PropertiesEditDialog } from './PropertiesEditDialog';
-import { PropertiesDeleteDialog } from './PropertiesDeleteDialog';
+import { PropertyCreateDialog } from './PropertyCreateDialog';
+import { PropertyEditDialog } from './PropertyEditDialog';
+import { PropertyDeleteDialog } from './PropertyDeleteDialog';
 import { PropertiesTable } from './PropertiesTable';
 
 const Properties = () => (
@@ -15,9 +15,9 @@ const Properties = () => (
       <Heading type=\\"h4\\" text=\\" Properties\\" />
     </Card.Header>
 
-    <PropertiesCreateDialog />
-    <PropertiesEditDialog />
-    <PropertiesDeleteDialog />
+    <PropertyCreateDialog />
+    <PropertyEditDialog />
+    <PropertyDeleteDialog />
     <Card.Body padding=\\"none\\" stretch scrollable>
       <PropertiesTable />
     </Card.Body>

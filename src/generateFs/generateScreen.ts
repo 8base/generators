@@ -2,6 +2,7 @@
 import { TableSchema } from '@8base/utils';
 import * as changeCase from 'change-case';
 import * as os from 'os';
+import * as pluralize from 'pluralize';
 
 import { formatCode } from '../formatCode';
 import { chunks } from '../generateFiles/chunks';
@@ -38,13 +39,15 @@ export const generateScreen =
     const generatorData = { tablesList, tableName, screenName };
     const routeUrl = `/${changeCase.camel(screenName)}`;
 
-    fs[`src/routes/${getScreenFolderName(screenName)}/${getCreateFormFileName(screenName)}`] =
+    const entityName = pluralize.singular(screenName);
+
+    fs[`src/routes/${getScreenFolderName(screenName)}/${getCreateFormFileName(entityName)}`] =
       generateCreateForm(generatorData, { ...config, includeColumns: formFields });
 
-    fs[`src/routes/${getScreenFolderName(screenName)}/${getEditFormFileName(screenName)}`] =
+    fs[`src/routes/${getScreenFolderName(screenName)}/${getEditFormFileName(entityName)}`] =
       generateEditForm(generatorData, { ...config, includeColumns: formFields });
 
-    fs[`src/routes/${getScreenFolderName(screenName)}/${getDeleteFormFileName(screenName)}`] =
+    fs[`src/routes/${getScreenFolderName(screenName)}/${getDeleteFormFileName(entityName)}`] =
       generateDeleteForm(generatorData);
 
     fs[`src/routes/${getScreenFolderName(screenName)}/${getTableFileName(screenName)}`] =

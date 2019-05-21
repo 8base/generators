@@ -18,7 +18,7 @@ export const generateEditForm =
 
     if (!table) { throw new Error(`Can't find a table ${tableName}`); }
 
-    const entityName = pluralize.singular(tableName);
+    const entityName = pluralize.singular(screenName || tableName);
     const mutationText = createTableRowUpdateTag(tablesList, tableName);
     const queryEntityText = createTableRowQueryTag(tablesList, tableName, { withMeta: false });
     const fields = table.fields.filter(({ isMeta, name }) => !isMeta && isFieldNeedsToInclude(name, includeColumns));
@@ -32,7 +32,7 @@ export const generateEditForm =
       mutationText,
       pluralize,
       queryEntityText,
-      screenName: screenName || entityName,
+      screenName: screenName || tableName,
       table,
       tableName,
       tableSelectors,

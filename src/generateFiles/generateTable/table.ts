@@ -17,7 +17,7 @@ export const generateTable =
 
     if (!table) { throw new Error(`Can't find a table ${tableName}`); }
 
-    const entityName = pluralize.singular(tableName);
+    const entityName = pluralize.singular(screenName || tableName);
     const queryText = createTableFilterGraphqlTag(tablesList, tableName, config);
     const columns = createQueryColumnsList(tablesList, tableName, config);
 
@@ -29,7 +29,7 @@ export const generateTable =
       entityName,
       pluralize,
       queryText,
-      screenName: screenName || entityName,
+      screenName: screenName || tableName,
       table,
       tableName,
       tableSelectors,

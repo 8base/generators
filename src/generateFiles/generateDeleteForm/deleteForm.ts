@@ -17,7 +17,7 @@ export const generateDeleteForm = ({ tablesList, tableName, screenName }: IGener
 
   const fields = table.fields.filter(({ isMeta }) => !isMeta);
 
-  const entityName = pluralize.singular(tableName);
+  const entityName = pluralize.singular(screenName || tableName);
 
   const tableGenerated = ejs.render(deleteForm, {
     SchemaNameGenerator,
@@ -26,7 +26,7 @@ export const generateDeleteForm = ({ tablesList, tableName, screenName }: IGener
     entityName,
     fields,
     pluralize,
-    screenName: screenName || entityName,
+    screenName: screenName || tableName,
     tableName,
   });
 

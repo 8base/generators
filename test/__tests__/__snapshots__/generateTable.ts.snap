@@ -9,7 +9,7 @@ import { DateTime } from 'luxon';
 import { TableBuilder, Dropdown, Icon, Menu, Link, Tag, Row, withModal } from '@8base/boost';
 import { FIELD_TYPE, SMART_FORMATS, FILE_FORMATS, DATE_FORMATS, SWITCH_FORMATS, SWITCH_VALUES } from '@8base/utils';
 
-const PROPERTY_LIST_QUERY = gql\`
+const PROPERTIES_LIST_QUERY = gql\`
 query PropertiesTableContent($filter: PropertyFilter, $orderBy: [PropertyOrderBy], $after: String, $before: String, $first: Int, $last: Int, $skip: Int) {
   propertiesList(filter: $filter, orderBy: $orderBy, after: $after, before: $before, first: $first, last: $last, skip: $skip) {
     items {
@@ -214,11 +214,11 @@ const TABLE_COLUMNS = [
 
 const enhancer = compose(
   withModal,
-  graphql(PROPERTY_LIST_QUERY, { name: 'properties' })
+  graphql(PROPERTIES_LIST_QUERY, { name: 'properties' })
 );
 
-const PropertyTable = enhancer(
-  class PropertyTable extends React.PureComponent {
+const PropertiesTable = enhancer(
+  class PropertiesTable extends React.PureComponent {
     renderEdit = rowData => (
       <Dropdown defaultOpen={false}>
         <Dropdown.Head>
@@ -379,6 +379,6 @@ const PropertyTable = enhancer(
   }
 );
 
-export { PropertyTable };
+export { PropertiesTable };
 "
 `;

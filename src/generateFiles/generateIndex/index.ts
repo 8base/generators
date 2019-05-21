@@ -7,13 +7,13 @@ import { formatCode } from '../../formatCode';
 import index from './index.js.ejs';
 
 export const generateIndex = ({ tableName, screenName }: { tableName: string, screenName?: string }) => {
-  const entityName = pluralize.singular(tableName);
+  const entityName = pluralize.singular(screenName || tableName);
 
   const tableGenerated = ejs.render(index, {
     changeCase,
     entityName,
     pluralize,
-    screenName: screenName || entityName,
+    screenName: screenName || tableName,
     tableName,
   });
 

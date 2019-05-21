@@ -20,8 +20,8 @@ import {
 } from '@8base/boost';
 import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components'
 
-const PROPERTY_CREATE_MUTATION = gql`
-  mutation <%= changeCase.pascal(screenName)%>Create($data: <%= SchemaNameGenerator.getCreateInputName(tableName)%>!) {
+const <%= changeCase.upper(entityName)%>_CREATE_MUTATION = gql`
+  mutation <%= changeCase.pascal(entityName)%>Create($data: <%= SchemaNameGenerator.getCreateInputName(tableName)%>!) {
     <%= SchemaNameGenerator.getCreateItemFieldName(tableName)%>(data: $data) {
       id
     }
@@ -36,33 +36,33 @@ const PROPERTY_CREATE_MUTATION = gql`
     tableSelectors: tableSelectors,
     table: table,
 }); %>
-const enhancer = graphql(PROPERTY_CREATE_MUTATION, {
+const enhancer = graphql(<%= changeCase.upper(entityName)%>_CREATE_MUTATION, {
   name: '<%= SchemaNameGenerator.getCreateItemFieldName(tableName)%>',
   options: {
     refetchQueries: ['<%=changeCase.pascal(tableName)%>TableContent', '<%= changeCase.pascal(SchemaNameGenerator.getTableListFieldName(tableName))%>'],
     context: {
-      TOAST_SUCCESS_MESSAGE: '<%= changeCase.pascal(screenName)%> successfuly created',
+      TOAST_SUCCESS_MESSAGE: '<%= changeCase.pascal(entityName)%> successfuly created',
     },
   },
 });
 
-const <%= changeCase.pascal(screenName)%>CreateDialog = enhancer(
-  class <%= changeCase.pascal(screenName)%>CreateDialog extends React.PureComponent {
+const <%= changeCase.pascal(entityName)%>CreateDialog = enhancer(
+  class <%= changeCase.pascal(entityName)%>CreateDialog extends React.PureComponent {
     static contextType = ModalContext;
 
     onSubmit = async data => {
       await this.props.<%= SchemaNameGenerator.getCreateItemFieldName(tableName)%>({ variables: { data } });
 
-      this.context.closeModal('<%= changeCase.upper(screenName)%>_CREATE_DIALOG_ID');
+      this.context.closeModal('<%= changeCase.upper(entityName)%>_CREATE_DIALOG_ID');
     };
 
     onClose = () => {
-      this.context.closeModal('<%= changeCase.upper(screenName)%>_CREATE_DIALOG_ID');
+      this.context.closeModal('<%= changeCase.upper(entityName)%>_CREATE_DIALOG_ID');
     };
 
     renderFormContent = ({ handleSubmit, invalid, submitting, pristine }) => (
       <form onSubmit={handleSubmit}>
-        <Dialog.Header title="New <%= changeCase.pascal(screenName)%>" onClose={this.onClose} />
+        <Dialog.Header title="New <%= changeCase.pascal(entityName)%>" onClose={this.onClose} />
         <Dialog.Body scrollable>
           <Grid.Layout gap="md" stretch><%-
             chunks.fieldsInputsList({ 
@@ -79,7 +79,7 @@ const <%= changeCase.pascal(screenName)%>CreateDialog = enhancer(
             Cancel
           </Button>
           <Button color="primary" type="submit" loading={submitting}>
-            Create <%= changeCase.pascal(screenName)%>
+            Create <%= changeCase.pascal(entityName)%>
           </Button>
         </Dialog.Footer>
       </form>
@@ -87,7 +87,7 @@ const <%= changeCase.pascal(screenName)%>CreateDialog = enhancer(
 
     render() {
       return (
-        <Dialog id={'<%= changeCase.upper(screenName)%>_CREATE_DIALOG_ID'} size="sm">
+        <Dialog id={'<%= changeCase.upper(entityName)%>_CREATE_DIALOG_ID'} size="sm">
           <FormLogic type="CREATE" tableSchemaName="<%= tableName%>" onSubmit={this.onSubmit} formatRelationToIds>
             {this.renderFormContent}
           </FormLogic>
@@ -97,4 +97,4 @@ const <%= changeCase.pascal(screenName)%>CreateDialog = enhancer(
   }
 );
 
-export { <%= changeCase.pascal(screenName)%>CreateDialog };
+export { <%= changeCase.pascal(entityName)%>CreateDialog };
