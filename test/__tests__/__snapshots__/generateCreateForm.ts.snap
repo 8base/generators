@@ -50,7 +50,7 @@ const enhancer = graphql(PROPERTY_CREATE_MUTATION, {
   options: {
     refetchQueries: ['PropertiesTableContent', 'PropertiesList'],
     context: {
-      TOAST_SUCCESS_MESSAGE: 'Property successfuly created',
+      TOAST_SUCCESS_MESSAGE: 'Property successfully created',
     },
   },
 });
