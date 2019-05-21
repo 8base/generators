@@ -20,7 +20,7 @@ const enhancer = graphql(PROPERTY_DELETE_MUTATION, {
   options: {
     refetchQueries: ['PropertiesTableContent', 'PropertiesList'],
     context: {
-      TOAST_SUCCESS_MESSAGE: 'Property successfuly deleted',
+      TOAST_SUCCESS_MESSAGE: 'Property successfully deleted',
     },
   },
 });

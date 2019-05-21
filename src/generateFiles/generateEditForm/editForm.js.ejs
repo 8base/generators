@@ -47,7 +47,7 @@ const ehnhancer = graphql(<%= changeCase.upper(entityName)%>_UPDATE_MUTATION, {
   options: {
     refetchQueries: ['<%=changeCase.pascal(tableName)%>TableContent', '<%= changeCase.pascal(SchemaNameGenerator.getTableListFieldName(tableName))%>'],
     context: {
-      TOAST_SUCCESS_MESSAGE: '<%= changeCase.pascal(entityName)%> successfuly updated',
+      TOAST_SUCCESS_MESSAGE: '<%= changeCase.pascal(entityName)%> successfully updated',
     },
   },
 });

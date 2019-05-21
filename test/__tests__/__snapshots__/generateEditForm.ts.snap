@@ -90,7 +90,7 @@ const ehnhancer = graphql(PROPERTY_UPDATE_MUTATION, {
   options: {
     refetchQueries: ['PropertiesTableContent', 'PropertiesList'],
     context: {
-      TOAST_SUCCESS_MESSAGE: 'Property successfuly updated',
+      TOAST_SUCCESS_MESSAGE: 'Property successfully updated',
     },
   },
 });
