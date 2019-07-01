@@ -1,5 +1,4 @@
 import { SchemaNameGenerator } from '@8base/schema-name-generator';
-// @ts-ignore
 import { createTableRowQueryTag, createTableRowUpdateTag , tableSelectors } from '@8base/utils';
 import * as changeCase from 'change-case';
 import * as ejs from 'ejs';
@@ -13,14 +12,16 @@ import { chunks } from '../chunks';
 import editForm from './editForm.js.ejs';
 
 export const generateEditForm =
-  ({ tablesList, tableName, screenName }: IGeneratorsData, { includeColumns }: GeneratorsConfig = {}) => {
-    const table = tablesList.find(({ name }) => tableName === name);
+  ({ tablesList, tableId, screenName }: IGeneratorsData, { includeColumns }: GeneratorsConfig = {}) => {
+    const table = tablesList.find(({ id }) => tableId === id);
 
-    if (!table) { throw new Error(`Can't find a table ${tableName}`); }
+    if (!table) { throw new Error(`Can't find a table with ${tableId} id`); }
+
+    const tableName = table.displayName || table.name;
 
     const entityName = pluralize.singular(screenName || tableName);
-    const mutationText = createTableRowUpdateTag(tablesList, tableName);
-    const queryEntityText = createTableRowQueryTag(tablesList, tableName, { withMeta: false });
+    const mutationText = createTableRowUpdateTag(tablesList, tableId);
+    const queryEntityText = createTableRowQueryTag(tablesList, tableId, { withMeta: false });
     const fields = table.fields.filter(({ isMeta, name }) => !isMeta && isFieldNeedsToInclude(name, includeColumns));
 
     const tableGenerated = ejs.render(editForm, {

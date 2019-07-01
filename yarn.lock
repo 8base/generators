@@ -2,20 +2,26 @@
 # yarn lockfile v1
 
 
-"@8base/schema-name-generator@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@8base/schema-name-generator/-/schema-name-generator-0.1.1.tgz#66abca53e9be1fa348a80549f83727d714cf68c6"
-  integrity sha512-C5bA/utiejd9K5RQbRdAatFVTlvoQ9SdiAnsxNb3NunTOQEqiuiAxRWCtEe3KSriGPgIdiyAx10cP38vPUyLuQ==
+"@8base/error-codes@^1.0.12":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@8base/error-codes/-/error-codes-1.0.14.tgz#d78b93c3d844d51cfdd491370346bf27e87eeebb"
+  integrity sha512-GaPi9oE8rCV3G4F5NPefCUmdhwklU0yCEoBKy1f58KY/iQBe1yYukiMmG6rKvUkbcc6zQlT2bkwiyrXpoCVg+w==
+
+"@8base/schema-name-generator@^0.1.5", "@8base/schema-name-generator@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@8base/schema-name-generator/-/schema-name-generator-0.1.6.tgz#2578d8fec252b0b96a598d88007136b3b141f0df"
+  integrity sha512-rY5wFsXIgrkhUztxZu9jNgRMQ4SGHtYq5sw+E3z1Tyxq9XLyWA7ZsHwI2/H5L2tFCE9CaabzbJ7GU3xgrnQgMg==
   dependencies:
+    lodash "^4.17.11"
     pluralize "^7.0.0"
 
-"@8base/utils@^0.21.0":
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/@8base/utils/-/utils-0.21.0.tgz#0395b278f21e11babcef02536c0386b2da82d1c9"
-  integrity sha512-0ua3ECK6yEXAFydtlsoB9MmUGzcaFvCtFid4/2U7mhr2dsJOgiFaJuetxNXwJwhV/ziGsBAMZlIJGL/svK20Mw==
+"@8base/utils@^0.30.0":
+  version "0.30.0"
+  resolved "https://registry.yarnpkg.com/@8base/utils/-/utils-0.30.0.tgz#7179727851ab05e68b65d6ce66afc8b6d7b598b5"
+  integrity sha512-Z7pOAc5LOl6SVwoxxleCDnQfQS60gnR7/bqliYqyBxgdiclLO3bRx2KzGUAQPJnQIkW9WbUHQmQlwBNIlhvvRA==
   dependencies:
-    "@8base/schema-name-generator" "^0.1.1"
-    "@babel/runtime" "^7.3.1"
+    "@8base/error-codes" "^1.0.12"
+    "@8base/schema-name-generator" "^0.1.5"
     graphql-prettier "^1.0.5"
     ramda "^0.26.1"
     reselect "^4.0.0"

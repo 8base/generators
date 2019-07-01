@@ -800,7 +800,7 @@ const tablesSchema = [
           relationTableName: 'bi00nqd',
           relationFieldName: 'bid',
           refTable: {
-            id: '5c3c68118033b3450409b5c9',
+            id: 'PROPERTIES_ID',
             name: 'Properties',
             __typename: 'Table',
           },
@@ -2335,7 +2335,7 @@ const tablesSchema = [
     __typename: 'Table',
   },
   {
-    id: '5c3c68118033b3450409b5c9',
+    id: 'PROPERTIES_ID',
     name: 'Properties',
     displayName: 'Properties',
     isSystem: false,
@@ -3135,7 +3135,7 @@ const tablesSchema = [
           relationTableName: '0j10nsz',
           relationFieldName: 'bid',
           refTable: {
-            id: '5c3c68118033b3450409b5c9',
+            id: 'PROPERTIES_ID',
             name: 'Properties',
             __typename: 'Table',
           },

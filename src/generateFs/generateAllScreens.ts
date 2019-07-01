@@ -23,8 +23,8 @@ interface IGenerateProjectFsData {
 export const generateAllScreens = ({ tablesList, screens }: IGenerateProjectFsData, config: GeneratorsConfig) => {
   const fs: { [key: string]: string } = {};
 
-  screens.forEach(({ screenName, tableName, tableFields, formFields }) => {
-    const generatorData = { tablesList, tableName, screenName };
+  screens.forEach(({ screenName, tableId, tableFields, formFields }) => {
+    const generatorData = { tablesList, tableId, screenName };
     fs[`src/routes/${getScreenFolderName(screenName)}/${getCreateFormFileName(screenName)}`] =
       generateCreateForm(generatorData, { ...config, includeColumns: formFields });
 

@@ -11,13 +11,13 @@ export type GeneratorsConfig = {
 
 export interface IGeneratorsData {
   tablesList: TableSchema[];
-  tableName: string;
+  tableId: string;
   screenName?: string;
 }
 
 export interface IScreenTable {
   id?: string;
-  tableName: string;
+  tableId: string;
   screenName?: string;
   routeUrl?: string;
   tableFields?: string[];
