@@ -4,7 +4,7 @@ import { tablesSchema } from '../__fixtures__/tablesSchema';
 it('should generate delete form by the table name', () => {
   const generatedTable = generateDeleteForm({
     tablesList: tablesSchema,
-    tableName: 'Properties',
+    tableId: 'PROPERTIES_ID',
   });
 
   expect(generatedTable).toMatchSnapshot();

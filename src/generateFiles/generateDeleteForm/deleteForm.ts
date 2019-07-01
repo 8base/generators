@@ -10,10 +10,12 @@ import { chunks } from '../chunks';
 // @ts-ignore
 import deleteForm from './deleteForm.js.ejs';
 
-export const generateDeleteForm = ({ tablesList, tableName, screenName }: IGeneratorsData) => {
-  const table = tablesList.find(({ name }) => tableName === name);
+export const generateDeleteForm = ({ tablesList, tableId, screenName }: IGeneratorsData) => {
+  const table = tablesList.find(({ id }) => tableId === id);
 
-  if (!table) { throw new Error(`Can't find a table ${tableName}`); }
+  if (!table) { throw new Error(`Can't find a table with ${tableId} id`); }
+
+  const tableName = table.displayName || table.name;
 
   const fields = table.fields.filter(({ isMeta }) => !isMeta);
 

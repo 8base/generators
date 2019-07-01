@@ -35,8 +35,8 @@ const PAGE_CONSTANTS = {
 export const generateScreen =
   ({ tablesList, screen, rootFile }: IGenerateProjectFsData, config: IGeneratorsCommonConfig) => {
     const fs: { [key: string]: string } = {};
-    const { screenName, tableName, tableFields, formFields } = screen;
-    const generatorData = { tablesList, tableName, screenName };
+    const { screenName, tableId, tableFields, formFields } = screen;
+    const generatorData = { tablesList, tableId, screenName };
     const routeUrl = `/${changeCase.camel(screenName)}`;
 
     const entityName = pluralize.singular(screenName);

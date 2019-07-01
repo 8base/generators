@@ -25,8 +25,9 @@ import {
 import { AddressInputField, PhoneInputField, ListFields, FileInputField } from '../../shared/components';
 
 const PROPERTY_QUERY = gql\`
-  query DataViewerPropertiesRow($id: ID!) {
+  query PropertiesEntity($id: ID!) {
   property(id: $id) {
+    id
     address {
       country
     }

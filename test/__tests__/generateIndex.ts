@@ -7,7 +7,7 @@ import { tablesSchema } from '../__fixtures__/tablesSchema';
 it('should generate table by the table name', () => {
   const generatedTable = generateIndex({
     tablesList: tablesSchema,
-    tableName: 'Properties',
+    tableId: 'PROPERTIES_ID',
     screenName: 'Properties',
   });
 
